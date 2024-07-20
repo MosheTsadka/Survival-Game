@@ -9,4 +9,9 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
     }
+
+    private void Start()
+    {
+        _rb.velocity = Vector2.right;
+    }
 }
