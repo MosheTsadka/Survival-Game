@@ -3,7 +3,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private MobileJoystick playerJoystick;
+    [SerializeField] private float moveSpeed;
     private Rigidbody2D _rb;
+    
 
     private void Awake()
     {
@@ -12,6 +15,11 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        _rb.velocity = Vector2.right;
+        
+    }
+
+    private void Update()
+    {
+        _rb.velocity = playerJoystick.GetMoveVector() * (moveSpeed * Time.deltaTime);
     }
 }
