@@ -15,7 +15,8 @@ public class Enemy : MonoBehaviour
     [Header("Effects")] [SerializeField] 
     private ParticleSystem particleEffect;
 
-    [Header("Attack")] [SerializeField] private int damage;
+    [Header("Attack")] 
+    [SerializeField] private int damage;
     [SerializeField] private float attackFrequency;
     [SerializeField] private float playerDetectionRadius;
     private float _attackDelay;
@@ -100,6 +101,8 @@ public class Enemy : MonoBehaviour
     private void Attack()
     {
         _attackTimer = 0;
+
+        _player.TakeDamage(damage);
     }
 
     private void DestroyObject()

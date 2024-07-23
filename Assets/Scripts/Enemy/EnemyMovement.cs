@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -6,11 +5,6 @@ public class EnemyMovement : MonoBehaviour
     [Header("Elements")] private Player _player;
 
     [Header("Settings")] [SerializeField] private float moveSpeed;
-
-    private void Awake()
-    {
-        _player = FindObjectOfType<Player>();
-    }
 
     private void Update()
     { 
