@@ -1,6 +1,7 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -11,9 +12,12 @@ public class PlayerHealth : MonoBehaviour
     [Header("Elements")] 
     [SerializeField] private Slider heathSlider;
 
+    [SerializeField] private TMP_Text healthText;
+
     private void Start()
     {
         _health = maxHealth;
+        UpdateUI();
 
         heathSlider.value = 1;
     }
@@ -22,9 +26,8 @@ public class PlayerHealth : MonoBehaviour
     {
         int realDamage = Mathf.Min(damage, _health);
         _health -= realDamage;
-
-        float healthBarValue = (float)_health / maxHealth;
-        heathSlider.value = healthBarValue;
+        
+        UpdateUI();
 
         if (_health <= 0)
         {
@@ -32,8 +35,17 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    private void UpdateUI()
+    {
+        float healthBarValue = (float)_health / maxHealth;
+        heathSlider.value = healthBarValue;
+        
+        healthText.text = _health + " / " + maxHealth;
+    }
+
     private void PlayerDead()
     {
         Debug.Log("The player is dead");
+        SceneManager.LoadScene(0);
     }
 }
