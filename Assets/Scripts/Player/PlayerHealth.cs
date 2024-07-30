@@ -3,49 +3,50 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class PlayerHealth : MonoBehaviour
+namespace SurvivorGame
 {
-    [Header("Settings")] 
-    [SerializeField] private int maxHealth;
-    private int _health;
-
-    [Header("Elements")] 
-    [SerializeField] private Slider heathSlider;
-
-    [SerializeField] private TMP_Text healthText;
-
-    private void Start()
+    public class PlayerHealth : MonoBehaviour
     {
-        _health = maxHealth;
-        UpdateUI();
+        [Header("Settings")] [SerializeField] private int maxHealth;
+        private int _health;
 
-        heathSlider.value = 1;
-    }
+        [Header("Elements")] [SerializeField] private Slider heathSlider;
 
-    public void TakeDamage(int damage)
-    {
-        int realDamage = Mathf.Min(damage, _health);
-        _health -= realDamage;
-        
-        UpdateUI();
+        [SerializeField] private TMP_Text healthText;
 
-        if (_health <= 0)
+        private void Start()
         {
-            PlayerDead();
+            _health = maxHealth;
+            UpdateUI();
+
+            heathSlider.value = 1;
         }
-    }
 
-    private void UpdateUI()
-    {
-        float healthBarValue = (float)_health / maxHealth;
-        heathSlider.value = healthBarValue;
-        
-        healthText.text = _health + " / " + maxHealth;
-    }
+        public void TakeDamage(int damage)
+        {
+            int realDamage = Mathf.Min(damage, _health);
+            _health -= realDamage;
 
-    private void PlayerDead()
-    {
-        Debug.Log("The player is dead");
-        SceneManager.LoadScene(0);
+            UpdateUI();
+
+            if (_health <= 0)
+            {
+                PlayerDead();
+            }
+        }
+
+        private void UpdateUI()
+        {
+            float healthBarValue = (float)_health / maxHealth;
+            heathSlider.value = healthBarValue;
+
+            healthText.text = _health + " / " + maxHealth;
+        }
+
+        private void PlayerDead()
+        {
+            Debug.Log("The player is dead");
+            SceneManager.LoadScene(0);
+        }
     }
 }

@@ -1,27 +1,28 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+namespace SurvivorGame
 {
-    [Header("Elements")]
-    [SerializeField] private MobileJoystick playerJoystick;
-    private Rigidbody2D _rb;
-    
-    [Header("Settings")]
-    [SerializeField] private float moveSpeed;
-    
-
-    private void Awake()
+    public class PlayerController : MonoBehaviour
     {
-        _rb = GetComponent<Rigidbody2D>();
-    }
+        [Header("Elements")] [SerializeField] private MobileJoystick playerJoystick;
+        private Rigidbody2D _rb;
 
-    private void Start()
-    {
-        
-    }
+        [Header("Settings")] [SerializeField] private float moveSpeed;
 
-    private void FixedUpdate()
-    {
-        _rb.velocity = playerJoystick.GetMoveVector() * (moveSpeed * Time.deltaTime);
+
+        private void Awake()
+        {
+            _rb = GetComponent<Rigidbody2D>();
+        }
+
+        private void Start()
+        {
+
+        }
+
+        private void FixedUpdate()
+        {
+            _rb.velocity = playerJoystick.GetMoveVector() * (moveSpeed * Time.deltaTime);
+        }
     }
 }

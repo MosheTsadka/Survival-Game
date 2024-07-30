@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5716339945307356282}
   - component: {fileID: 3905519260197558184}
-  m_Layer: 0
+  - component: {fileID: 2720491210637965889}
+  - component: {fileID: 3204302650540371033}
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,6 +50,61 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1.5
+--- !u!114 &2720491210637965889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039213303344715642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc6c6c41a433a73438ae3f8752134758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyRenderer: {fileID: 6682065804710897209}
+  spawnIndicator: {fileID: 302285428408271057}
+  multiplyScale: 1.2
+  particleEffect: {fileID: 2436842520175973575}
+  damage: 1
+  attackFrequency: 1
+  playerDetectionRadius: 0.6
+  showGizmos: 1
+--- !u!58 &3204302650540371033
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039213303344715642}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.090437055, y: 0.47629094}
+  serializedVersion: 2
+  m_Radius: 0.45887077
 --- !u!1 &4366546917781904234
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,7 +116,7 @@ GameObject:
   - component: {fileID: 7078196971718443514}
   - component: {fileID: 2436842520175973575}
   - component: {fileID: 4635254153872931641}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4944,7 +5001,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8184061932637012410}
   - component: {fileID: 6682065804710897209}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5028,7 +5085,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3186782170953490448}
   - component: {fileID: 302285428408271057}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpwanIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}

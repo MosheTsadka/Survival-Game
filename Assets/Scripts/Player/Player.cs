@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+namespace SurvivorGame
 {
-    private PlayerHealth _playerHealth;
-
-    private void Awake()
+    public class Player : MonoBehaviour
     {
-        _playerHealth = GetComponent<PlayerHealth>();
-    }
+        private PlayerHealth _playerHealth;
 
-    public void TakeDamage(int damage)
-    {
-        _playerHealth.TakeDamage(damage);
+        private void Awake()
+        {
+            _playerHealth = GetComponent<PlayerHealth>();
+        }
+
+        public void TakeDamage(int damage)
+        {
+            _playerHealth.TakeDamage(damage);
+        }
     }
 }
