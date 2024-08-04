@@ -9,24 +9,42 @@ namespace SurvivorGame
         [SerializeField] private float range;
         [SerializeField] private LayerMask enemyMask;
 
+        [SerializeField] private float aimLerp;
+
         private void Update()
         {
-            Enemy closestEnemy = null;
+            AutoAim();
+        }
 
-            //Enemy[] enemies = FindObjectsByType<Enemy>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        private void AutoAim()
+        {
+            Enemy closestEnemy = GetClosestEnemy();
+            
+            Vector2 targetUpVector = Vector3.up;
+
+            if (closestEnemy != null)
+            {
+                targetUpVector = (closestEnemy.transform.position - transform.position).normalized;
+            }
+            
+            transform.up = Vector3.Lerp(transform.up, targetUpVector, Time.deltaTime * aimLerp);
+        }
+        
+        private Enemy GetClosestEnemy()
+        {
+            Enemy closestEnemy = null;
             Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, range, enemyMask);
 
             if (enemies.Length <= 0)
             {
-                transform.right = Vector3.up;
-                return;
+                return null;
             }
 
             float minDistance = range;
 
-            for (int i = 0; i < enemies.Length; i++)
+            foreach (var t in enemies)
             {
-                Enemy enemyChecked = enemies[i].GetComponent<Enemy>();
+                Enemy enemyChecked = t.GetComponent<Enemy>();
                 float distanceToEnemy = Vector2.Distance(transform.position, enemyChecked.transform.position);
 
                 if (distanceToEnemy < minDistance)
@@ -36,13 +54,7 @@ namespace SurvivorGame
                 }
             }
 
-            if (closestEnemy == null)
-            {
-                transform.up = Vector3.up;
-                return;
-            }
-
-            transform.right = (closestEnemy.transform.position - transform.position).normalized;
+            return closestEnemy;
         }
 
         private void OnDrawGizmosSelected()
