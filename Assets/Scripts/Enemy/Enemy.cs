@@ -98,6 +98,11 @@ namespace SurvivorGame
             _player.TakeDamage(damage);
         }
 
+        public void TakeDamage(int damage)
+        {
+            
+        }
+
         private void DestroyObject()
         {
             particleEffect.transform.parent = null;
