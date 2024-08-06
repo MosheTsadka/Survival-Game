@@ -7,7 +7,8 @@ namespace SurvivorGame
 {
     public class PlayerHealth : MonoBehaviour
     {
-        [Header("Settings")] [SerializeField] private int maxHealth;
+        [Header("Settings")] 
+        [SerializeField] private int maxHealth;
         private int _health;
 
         [Header("Elements")] [SerializeField] private Slider heathSlider;

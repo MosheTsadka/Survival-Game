@@ -1,20 +1,28 @@
 using UnityEngine;
+using TMPro;
 
 namespace SurvivorGame
 {
     public class Enemy : MonoBehaviour
     {
-        [Header("elements")] private Player _player;
+        [Header("elements")] 
+        private Player _player;
         private EnemyMovement _enemyMovement;
 
-        [Header("Spawn Sequence Related")] [SerializeField]
-        private SpriteRenderer enemyRenderer;
+        [Header("Spawn Sequence Related")] 
+        [SerializeField] private SpriteRenderer enemyRenderer;
 
         [SerializeField] private SpriteRenderer spawnIndicator;
         [SerializeField] private float multiplyScale;
         private bool _hasSpawn;
 
-        [Header("Effects")] [SerializeField] private ParticleSystem particleEffect;
+        [Header("Effects")] 
+        [SerializeField] private ParticleSystem particleEffect;
+
+        [Header("Health")] 
+        [SerializeField] private TMP_Text healthText;
+        [SerializeField] private int maxHealth;
+        private int _health;
 
         [Header("Attack")] [SerializeField] private int damage;
         [SerializeField] private float attackFrequency;
@@ -22,7 +30,8 @@ namespace SurvivorGame
         private float _attackDelay;
         private float _attackTimer;
 
-        [Header("Debug")] [SerializeField] private bool showGizmos;
+        [Header("Debug")] 
+        [SerializeField] private bool showGizmos;
 
         private void Awake()
         {
@@ -41,6 +50,9 @@ namespace SurvivorGame
         {
             StartSpawnSequence();
             _attackDelay = 1f / attackFrequency;
+
+            _health = maxHealth;
+            healthText.text = _health.ToString();
         }
 
         private void Update()
@@ -100,7 +112,15 @@ namespace SurvivorGame
 
         public void TakeDamage(int damage)
         {
+            int realDamage = Mathf.Min(damage, _health);
+            _health -= realDamage;
             
+            healthText.text = _health.ToString();
+
+            if (_health <= 0)
+            {
+                DestroyObject();
+            }
         }
 
         private void DestroyObject()
