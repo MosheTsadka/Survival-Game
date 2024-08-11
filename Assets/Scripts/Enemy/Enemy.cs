@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using TMPro;
 
@@ -14,6 +15,7 @@ namespace SurvivorGame
 
         [SerializeField] private SpriteRenderer spawnIndicator;
         [SerializeField] private float multiplyScale;
+        [SerializeField] private Collider2D collider2d;
         private bool _hasSpawn;
 
         [Header("Effects")] 
@@ -29,6 +31,9 @@ namespace SurvivorGame
         [SerializeField] private float playerDetectionRadius;
         private float _attackDelay;
         private float _attackTimer;
+
+        [Header("Actions")] 
+        public static Action<int, Vector2> OnDamageTaken;
 
         [Header("Debug")] 
         [SerializeField] private bool showGizmos;
@@ -80,6 +85,9 @@ namespace SurvivorGame
         {
             SetRenderersVisibility(true);
             _hasSpawn = true;
+
+            collider2d.enabled = true;
+            
             _enemyMovement.StorePlayer(_player);
         }
 
@@ -116,6 +124,8 @@ namespace SurvivorGame
             _health -= realDamage;
             
             healthText.text = _health.ToString();
+            
+            OnDamageTaken?.Invoke(damage, transform.position);
 
             if (_health <= 0)
             {

@@ -66,6 +66,7 @@ MonoBehaviour:
   enemyRenderer: {fileID: 6682065804710897209}
   spawnIndicator: {fileID: 302285428408271057}
   multiplyScale: 1.2
+  collider2d: {fileID: 3204302650540371033}
   particleEffect: {fileID: 2436842520175973575}
   healthText: {fileID: 7453121411932189473}
   maxHealth: 3
@@ -80,7 +81,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2039213303344715642}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -5179,7 +5180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8432543125066545418
 RectTransform:
   m_ObjectHideFlags: 0
