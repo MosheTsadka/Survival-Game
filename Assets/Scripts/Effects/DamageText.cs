@@ -10,7 +10,6 @@ namespace SurvivorGame
         [SerializeField] private Animator animator;
         [SerializeField] private TMP_Text damageText;
 
-        [NaughtyAttributes.Button]
         public void PlayAnimation(int damage)
         {
             damageText.text = damage.ToString();

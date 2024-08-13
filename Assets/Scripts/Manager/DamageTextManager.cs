@@ -1,13 +1,14 @@
 using System;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Serialization;
 
 namespace SurvivorGame
 {
     public class DamageTextManager : MonoBehaviour
     {
         [Header("Elements")]
-        [SerializeField] private DamageText damageTextPrefab;
+        [SerializeField] private DamageText damageText;
 
         [Header("Pooling")] 
         private ObjectPool<DamageText> _damageTextPool;
@@ -24,22 +25,22 @@ namespace SurvivorGame
 
         private DamageText CreateFunction()
         {
-            return Instantiate(damageTextPrefab, transform);
+            return Instantiate(damageText, transform);
         }
 
         private void ActionOnGet(DamageText obj)
         {
-            damageTextPrefab.gameObject.SetActive(true);
+            damageText.gameObject.SetActive(true);
         }
 
         private void ActionOnRelease(DamageText obj)
         {
-            damageTextPrefab.gameObject.SetActive(false);
+            damageText.gameObject.SetActive(false);
         }
 
         private void ActionOnDestroy(DamageText obj)
         {
-            Destroy(damageTextPrefab.gameObject);
+            Destroy(damageText.gameObject);
         }
 
         private void OnDestroy()
@@ -47,7 +48,6 @@ namespace SurvivorGame
             Enemy.OnDamageTaken -= EnemyHitCallBack;
         }
 
-        [NaughtyAttributes.Button]
         private void EnemyHitCallBack(int damage, Vector2 enemyPos)
         {
             DamageText damageTextInstance = _damageTextPool.Get();
@@ -57,7 +57,7 @@ namespace SurvivorGame
             
             damageTextInstance.PlayAnimation(damage);
 
-            LeanTween.delayedCall(1, () => _damageTextPool.Release(damageTextInstance));
+            LeanTween.delayedCall(1.0f, () => _damageTextPool.Release(damageTextInstance));
         }
     }
 }
